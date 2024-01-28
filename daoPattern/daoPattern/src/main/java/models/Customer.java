@@ -3,14 +3,19 @@ package models;
 import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Customer {
+	@JsonProperty("id")
 	private int customerId;
 	private String email;
+	@JsonProperty("first")
 	private String firstName;
+	@JsonProperty("last")
 	private String lastName;
 	private String company;
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss:SSS'Z'", timezone = "UTC")
+	@JsonProperty("created_at")
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss", timezone = "UTC")
 	private Date createdAt;
 	private String country;
 
