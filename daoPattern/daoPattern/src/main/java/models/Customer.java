@@ -1,11 +1,12 @@
 package models;
 
+import java.io.Serializable;
 import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class Customer {
+public class Customer implements Serializable {
 	@JsonProperty("id")
 	private int customerId;
 	private String email;
@@ -18,6 +19,19 @@ public class Customer {
 	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd'T'HH:mm:ss", timezone = "UTC")
 	private Date createdAt;
 	private String country;
+
+	public Customer() {
+	}
+
+	public Customer(int customerId, String email, String firstName, String lastName, String company, Date createdAt, String country) {
+		this.customerId = customerId;
+		this.email = email;
+		this.firstName = firstName;
+		this.lastName = lastName;
+		this.company = company;
+		this.createdAt = createdAt;
+		this.country = country;
+	}
 
 	public int getCustomerId() {
 		return customerId;
@@ -73,5 +87,11 @@ public class Customer {
 
 	public void setCountry(String country) {
 		this.country = country;
+	}
+
+	@Override
+	public String toString() {
+		return "Customer{" + "customerId=" + customerId + ", email='" + email + '\'' + ", firstName='" + firstName + '\'' + ", lastName='" + lastName + '\''
+				+ ", company='" + company + '\'' + ", createdAt=" + createdAt + ", country='" + country + '\'' + '}';
 	}
 }
