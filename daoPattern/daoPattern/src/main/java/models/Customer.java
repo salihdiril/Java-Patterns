@@ -7,6 +7,7 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class Customer implements Serializable {
+	private static final long serialVersionUID = 1L;
 	@JsonProperty("id")
 	private int customerId;
 	private String email;

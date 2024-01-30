@@ -11,8 +11,8 @@ public class HazelcastDaoUtil {
 	// we can use native serializer of Hazelcast for optimized performance
 	private static Config customConfig = initializeHazelcastConfig();
 	// defaul config will also work if the object we want to put in a hazelcast IMap if our object implements Serializable class
-	private static Config defaultConfig = new Config();
-	public static final HazelcastCustomerDaoImpl hazelcastCustomerDaoImpl = new HazelcastCustomerDaoImpl(customConfig);
+	private static Config defaultConfig = new Config().setClusterName("dev-salih");
+	public static final HazelcastCustomerDaoImpl hazelcastCustomerDaoImpl = new HazelcastCustomerDaoImpl(defaultConfig);
 
 	private HazelcastDaoUtil() {
 	}
@@ -21,6 +21,7 @@ public class HazelcastDaoUtil {
 		// Registering a custom Compact Serializer to our config
 		Config config = new Config();
 		config.getSerializationConfig().getCompactSerializationConfig().addSerializer(new CustomerCompactSerializer());
+		config.setClusterName("dev-salih");
 		return config;
 	}
 
