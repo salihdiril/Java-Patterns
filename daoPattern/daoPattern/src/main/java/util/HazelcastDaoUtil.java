@@ -6,22 +6,20 @@ import com.hazelcast.config.Config;
 import com.hazelcast.map.IMap;
 import dao.HazelcastCustomerDaoImpl;
 import models.Customer;
+import models.HazelcastConfig;
 
 public class HazelcastDaoUtil {
-	// we can use native serializer of Hazelcast for optimized performance
-	private static Config customConfig = initializeHazelcastConfig();
-	// defaul config will also work if the object we want to put in a hazelcast IMap if our object implements Serializable class
-	private static Config defaultConfig = new Config().setClusterName("dev-salih");
+	private static Config defaultConfig = HazelcastConfig.DEFAULT_CONFIG.getHzConfig();
 	public static final HazelcastCustomerDaoImpl hazelcastCustomerDaoImpl = new HazelcastCustomerDaoImpl(defaultConfig);
 
 	private HazelcastDaoUtil() {
 	}
 
-	private static Config initializeHazelcastConfig() {
+	public static Config initializeCustomHazelcastConfig() {
+		// we can use native serializer of Hazelcast for optimized performance
 		// Registering a custom Compact Serializer to our config
 		Config config = new Config();
 		config.getSerializationConfig().getCompactSerializationConfig().addSerializer(new CustomerCompactSerializer());
-		config.setClusterName("dev-salih");
 		return config;
 	}
 
